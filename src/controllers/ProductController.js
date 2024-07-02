@@ -47,6 +47,19 @@ class ProductController extends Database {
         }
     }
 
+    async listar(req, res) {
+        try {
+            const products = await this.pool.query(
+                `
+                select * from products
+                `
+            )
+            return res.status(200).json(products.rows)
+        } catch (error) {
+            console.log(error)
+            return res.status(500).json(error.message);
+        }
+    }
 }
 
 module.exports = ProductController
