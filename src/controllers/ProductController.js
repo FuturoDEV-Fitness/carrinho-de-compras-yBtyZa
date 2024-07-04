@@ -60,6 +60,30 @@ class ProductController extends Database {
             return res.status(500).json(error.message);
         }
     }
+
+    async listarDetalhes(req, res) {
+        try {
+            const { id } = req.params
+
+            const products = await this.pool.query(`
+                select p.name, p.description, p.color, p.voltagem, p.price, c.name as category_name
+                from products p
+                inner join categories c on p.category_id = c.id
+                where p.id = $1
+                `, [id])
+
+            if (products.rows.length === 0) {
+                return res.status(404).json({
+                    mensagem: 'Esse produto não existe'
+                })
+            }
+            return res.status(200).json(products.rows[0])
+
+        } catch (error) {
+            console.log(error)
+            return res.status(500).json(error.message);
+        }
+    }
 }
 
 module.exports = ProductController

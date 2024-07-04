@@ -6,5 +6,6 @@ const productsController = new ProductsController();
 
 productsRouter.post('/', productsController.criar.bind(productsController));
 productsRouter.get('/', productsController.listar.bind(productsController));
+productsRouter.get('/:id', productsController.listarDetalhes.bind(productsController));
 
 module.exports = productsRouter;
