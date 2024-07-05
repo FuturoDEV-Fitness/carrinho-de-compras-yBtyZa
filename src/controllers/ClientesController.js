@@ -5,6 +5,7 @@ class ClientesController extends Database {
         super();
     }
 
+    // Checar se o email existe
     async checarEmail(email) {
         try{
         const dados = await this.pool.query(
@@ -24,6 +25,7 @@ class ClientesController extends Database {
     }
 }
 
+    // Checar se o cpf existe
     async checarCpf(cpf) {
         try{
             const dados = await this.pool.query(
@@ -43,6 +45,7 @@ class ClientesController extends Database {
         }
     }
 
+    //Inserir um novo cliente no banco de dados
     async criar(req, res) {
         try {
             const dados = req.body

@@ -5,6 +5,7 @@ class ProductController extends Database {
         super();
     }
 
+    // Cadastra um novo produto no banco de dados
     async criar(req, res) {
         try {
             const dados = req.body
@@ -14,6 +15,7 @@ class ProductController extends Database {
                 })
             }
 
+            // Verificar se a categoria existe
             const name_categoria  = req.body.category_id
             const category = await this.pool.query(
                 `
@@ -27,6 +29,7 @@ class ProductController extends Database {
                 })
             }
 
+            // Cadastra o novo produto
             const products = await this.pool.query(
                 `
                 insert into products( name, amount, color, voltagem, description, price, category_id)
@@ -47,6 +50,7 @@ class ProductController extends Database {
         }
     }
 
+    // Listar todos os produtos
     async listar(req, res) {
         try {
             const products = await this.pool.query(
@@ -61,6 +65,7 @@ class ProductController extends Database {
         }
     }
 
+    // Listar detalhes de um produto
     async listarDetalhes(req, res) {
         try {
             const { id } = req.params
